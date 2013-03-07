@@ -16,7 +16,7 @@ class BD {
 
     public function agregarElem($elem) {
         $conexion = conectarse();
-        $query = "INSERT INTO " . $schema . "." . $elem->getTable() . " VALUES (" . $elem->columnsDB() . ") = (" . $elem->valuesDB() . ")";
+        $query = "INSERT INTO " . $schema . "." . $elem->getTable() . "  (" . $elem->columnsDB() . ") VALUES (" . $elem->valuesDB() . ")";
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo agregar el elemento";
@@ -36,7 +36,7 @@ class BD {
 
     public function consultarElem($elem) {
         $conexion = conectarse();
-        $query = " SELECT * FROM " . $schema . "." . $elem->getTable() . " WHERE id = " . $elem->getId();
+        $query = " SELECT * FROM " . $schema . "." . $elem->getTable() . ($elem->getId() ? " WHERE id = " . $elem->getId(): "" );
         $result = pg_query($conexion, $query);
         desconectarse($conexion);
         return pg_fetch_object($result);
