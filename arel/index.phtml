@@ -18,13 +18,13 @@
 					<select id="filter">
 						<option value="">All categories</option>
 						<?php
-							$categorias = $_SESSION['categorias'];
-							foreach ($categorias as $valor) {
-							    
-							?><option value=<?php echo $valor ?>><?php echo $valor ?></option><?php
-
-							}
+							$categorias = array("Entretenimiento", "Comida");
+							foreach ($categorias as $valor) {	    
 						?>
+							<option value=<?php echo $valor ?> ><?php echo $valor ?></option>
+                        <?php 
+                    		} 
+                    	?>	
 					</select> 
 				</div>
 				<div class="step">
