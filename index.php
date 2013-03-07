@@ -18,7 +18,7 @@ else
 	trigger_error("user position (l) missing. For testing, please provide a 'l' GET parameter with your request. e.g. pois/search/?l=23.34534,11.56734,0");
 
 //create the xml start
-ArelXMLHelper::start(NULL, "/arel/index.html");
+ArelXMLHelper::start(NULL, "/arel/consultarCategorias.php");
 
 
 $categorias = array("Entretenimiento", "Comida");
