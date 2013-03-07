@@ -18,7 +18,7 @@ class Categoria {
         $this->table = $table;
     }
 
-        public function getNombre() {
+    public function getNombre() {
         return $this->nombre;
     }
 
