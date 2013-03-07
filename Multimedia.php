@@ -11,12 +11,13 @@
  * @author andreth
  */
 class Multimedia {
+
     private $id;
     private $enlace;
     private $tipo;
     private $poi;
     private $descripcion;
- 
+
     public function getId() {
         return $this->id;
     }
@@ -56,5 +57,17 @@ class Multimedia {
     public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
+
+    public function valuesDB() {
+        return '' . $id . ',' . '\"' . $enlace . '\",' . '\"'
+                . $tipo . '\",' . '\"' . $descripcion . '\",'. '\"' . $poi->getId() . '\"';
+    }
+
+    public function columnsDB() {
+        return '\"' . "id" . '\",' . '\"' . "enlace" . '\",'
+                . '\"' . "tipo" . '\",' . '\"' . "descripcion" . '\",' . '\"'. "poi" . '\"';
+    }
+
 }
+
 ?>
