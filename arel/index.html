@@ -1,0 +1,37 @@
+<html>
+    <head>
+    	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+       	<script type="text/javascript" src="http://dev.junaio.com/arel/js/arel.js"></script>
+    	<script type="text/javascript" src="logic_LBS9.js"></script>
+    	<link href="style.css" rel="stylesheet" type="text/css" />
+    	<title>First Arel</title>
+    </head>
+	<body>
+		<div class="filteroptions">
+			<div class="filterbuttonArea">	
+				<a href="#" class="filterButton">Filter</a>
+			</div>
+			<div class="filterOptionsInner">
+				<div class="dropdown">
+					<div class="label">Category (Server):</div>
+					<select id="filter">
+						<option value="">All categories</option>
+						<?php
+							foreach ($categorias as $valor) {
+							    
+							?><option value=<?php echo $valor ?>><?php echo $valor ?></option><?php
+
+							}
+						?>
+					</select> 
+				</div>
+				<div class="step">
+					<form>
+						<div class="label">Search (Locally):</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>				
+					</form>
+				</div>
+			</div>			
+		</div>		
+	</body>            
+</html>
