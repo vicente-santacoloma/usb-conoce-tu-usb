@@ -14,7 +14,7 @@ and open the template in the editor.
             $categorias = BD::consultarElem(new Categoria());
             foreach ($categorias as $value) {
                 ?>
-                <option value=<?= $value ?>><?= $value ?></option> 
+                <option value=<?= $value->nombre ?>><?= $value->nombre ?></option> 
             <?php }
             ?>
         </select>
