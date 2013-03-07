@@ -16,14 +16,18 @@
 				<div class="dropdown">
 					<div class="label">Category (Server):</div>
 					<select id="filter">
-						<option value="">All categories</option>
-						<?php
-							foreach ($categorias as $valor) {
-							    
-							?><option value=<?php echo $valor ?>><?php echo $valor ?></option><?php
+						
 
-							}
-						?>
+                                                <option value="">All categories</option>
+                                                <?php
+                                                        $categorias = apc_fetch('categorias');
+
+							foreach ($categorias as $valor) {
+                                                ?>
+						<?php echo sizeOf($categorias); ?>
+                                                <option value=<?php echo $valor; ?> ><?php echo $valor; ?></option>
+                                                <?php } ?>
+        		                        <option value=""><?php echo sizeOf($categorias); ?></option>	
 					</select> 
 				</div>
 				<div class="step">
