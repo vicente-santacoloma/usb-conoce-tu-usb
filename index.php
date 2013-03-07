@@ -7,6 +7,11 @@
 
 require_once '../ARELLibrary/arel_xmlhelper.class.php';
 
+if (!Junaio::checkAuthentication() && !isset($_GET['mode'])) { 
+        header('HTTP/1.0 401 Unauthorized'); 
+        exit; 
+}
+
 if(!empty($_GET['l']))
 	$position = explode(",", $_GET['l']);
 else
