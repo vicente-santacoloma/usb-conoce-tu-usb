@@ -7,8 +7,18 @@
 class Categoria {
 
     private $nombre;
+    
+    private $table = "categoria";
 
-    public function getNombre() {
+    public function getTable() {
+        return $this->table;
+    }
+
+    public function setTable($table) {
+        $this->table = $table;
+    }
+
+        public function getNombre() {
         return $this->nombre;
     }
 

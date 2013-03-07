@@ -17,8 +17,16 @@ class Multimedia {
     private $tipo;
     private $poi;
     private $descripcion;
+    private $table = "multimedia_poi";
+    public function getTable() {
+        return $this->table;
+    }
 
-    public function getId() {
+    public function setTable($table) {
+        $this->table = $table;
+    }
+
+        public function getId() {
         return $this->id;
     }
 

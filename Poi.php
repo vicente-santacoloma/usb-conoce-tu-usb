@@ -17,8 +17,17 @@ class Poi {
     private $multimedia;
     private $categorias;
     private $table = "pois";
+    
+    
+    public function getTable() {
+        return $this->table;
+    }
 
-    public function getId() {
+    public function setTable($table) {
+        $this->table = $table;
+    }
+
+        public function getId() {
         return $this->id;
     }
 
