@@ -9,6 +9,7 @@ session_start();
 
 require_once '../ARELLibrary/arel_xmlhelper.class.php';
 
+
 if(!empty($_GET['l']))
 	$position = explode(",", $_GET['l']);
 else
