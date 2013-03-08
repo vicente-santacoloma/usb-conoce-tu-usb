@@ -30,9 +30,9 @@ and open the template in the editor.
             echo "Id poi". $poi->getId() . "<br>";
             echo "Creador poi". $poi->getCreador() . "<br>";
             echo "Nombre Poi". $poi->getNombre() . "<br>";
-            echo "Altitus poi". $poi->getAltitud() . "<br>";
+            echo "Altitud poi". $poi->getAltitud() . "<br>";
             echo "Longitud poi".$poi->getLongitud() . "<br>";
-            echo "Latitus poi".$poi->getLatitud() . "<br>";
+            echo "Latitud poi".$poi->getLatitud() . "<br>";
             echo "Descripcion poi". $poi->getDescripcion() . "<br>";
         }
         ?>

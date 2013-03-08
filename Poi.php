@@ -17,8 +17,24 @@ class Poi {
     private $multimedia;
     private $categorias;
     private $table = "pois";
+    
+    public function getMultimedia() {
+        return $this->multimedia;
+    }
 
-    public function getTable() {
+    public function setMultimedia($multimedia) {
+        $this->multimedia = $multimedia;
+    }
+
+    public function getCategorias() {
+        return $this->categorias;
+    }
+
+    public function setCategorias($categorias) {
+        $this->categorias = $categorias;
+    }
+
+        public function getTable() {
         return $this->table;
     }
 

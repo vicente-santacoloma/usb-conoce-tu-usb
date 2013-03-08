@@ -62,6 +62,22 @@ class BD {
         $this->desconectarse($conexion);
     }
 
+    public function consultarPoisFull(Poi $poi) {
+        $conexion = $this->conectarse();
+        $query = " SELECT p.id, p.creator, p.nombre as nombrepoi, c.nombre as nombrecat, p.descripcion, p.altitud, 
+                p.longitud, p.latitud FROM " . $this->schema . "." .
+                "pois p " . "," . $this->schema . "." . "categorias_poi c" . " WHERE p.id=c.poi".
+                ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" )."   ORDER BY p.id";
+
+        $query2 = " SELECT p.id, m.enlace, m.tipo, m.descripcion FROM " . $this->schema . "." .
+                "pois p" . "," . $this->schema . "." . "multimedia_poi m" . " WHERE p.id=m.poi" .
+                ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" )."  ORDER BY p.id";
+        $result1 = pg_query($conexion, $query);
+        $result2 = pg_query($conexion, $query2);
+        $this->desconectarse($conexion);
+        return array($result1, $result2);
+    }
+
 }
 
 ?>
