@@ -2,11 +2,11 @@
 
 class BD {
 
-    private $schema = "USB";
-    private $local = true;
+    private $schema = "\"USB\"";
+    private $test_local = true;
 
     public function conectarse() {
-        if ($local){
+        if ($this->test_local) {
             return $this->conectarse_local();
         }
         $dbconexion = pg_connect("host=auliya.ldc.usb.ve dbname=CI585226 user=08-11031 password=rausb")
@@ -26,40 +26,40 @@ class BD {
 
     public function agregarElem($elem) {
         $conexion = $this->conectarse();
-        $query = "INSERT INTO " . $schema . "." . $elem->getTable() . "  (" . $elem->columnsDB() . ") VALUES (" . $elem->valuesDB() . ")";
+        $query = "INSERT INTO " . $this->schema . "." . $elem->getTable() . "  (" . $elem->columnsDB() . ") VALUES (" . $elem->valuesDB() . ")";
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo agregar el elemento";
         }
-        desconectarse($conexion);
+        $this->desconectarse($conexion);
     }
 
     public function eliminarElem($elem) {
         $conexion = $this->conectarse();
-        $query = " DELETE FROM " . $schema . "." . $elem->getTable() . " WHERE " .$elem->idname()." = " . $elem->getId();
+        $query = " DELETE FROM " . $this->schema . "." . $elem->getTable() . " WHERE " . $elem->idname() . " = " . $elem->getId();
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo eliminar el elemento";
         }
-        desconectarse($conexion);
+        $this->desconectarse($conexion);
     }
 
     public function consultarElem($elem) {
         $conexion = $this->conectarse();
-        $query = " SELECT * FROM " . $schema . "." . $elem->getTable() . ($elem->getId() ? " WHERE " .$elem->getIdName()." = " . $elem->getId() : "" );
+        $query = " SELECT * FROM " . $this->schema . "." . $elem->getTable() . ($elem->getId() ? " WHERE " . $elem->getIdName() . " = " . $elem->getId() : "" );
         $result = pg_query($conexion, $query);
-        desconectarse($conexion);
+        $this->desconectarse($conexion);
         return $result;
     }
 
     public function modificarElem($elem, $value) {
         $conexion = $this->conectarse();
-        $query = "UPDATE " . $schema . "." . $elem->getTable() . " SET " . $elem->getColumn() . " = " . $value . " WHERE " .$elem->idname()." = " . $elem->getId();
+        $query = "UPDATE " . $this->schema . "." . $elem->getTable() . " SET " . $elem->getColumn() . " = " . $value . " WHERE " . $elem->idname() . " = " . $elem->getId();
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo modificar el elemento";
         }
-        desconectarse($conexion);
+        $this->desconectarse($conexion);
     }
 
 }
