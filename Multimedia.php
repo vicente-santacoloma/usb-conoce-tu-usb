@@ -68,12 +68,12 @@ class Multimedia {
     }
 
     public function valuesDB() {
-        return '' . $id . ',' . '\"' . $enlace . '\",' . '\"'
+        return '\"' . $enlace . '\",' . '\"'
                 . $tipo . '\",' . '\"' . $descripcion . '\",' . '\"' . $poi->getId() . '\"';
     }
 
     public function columnsDB() {
-        return '\"' . "id" . '\",' . '\"' . "enlace" . '\",'
+        return '\"' . "enlace" . '\",'
                 . '\"' . "tipo" . '\",' . '\"' . "descripcion" . '\",' . '\"' . "poi" . '\"';
     }
 

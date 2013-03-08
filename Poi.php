@@ -83,12 +83,12 @@ class Poi {
     }
 
     public function valuesDB() {
-        return '' . $id . ',' . '\"' . $creator . '\",' . '\"' . $nombre . '\",' . '\"' . $descripcion . '\",' .
+        return '\"' . $creator . '\",' . '\"' . $nombre . '\",' . '\"' . $descripcion . '\",' .
                 '' . $longitud . ',' . '' . $latitud . ',' . '' . $altitud . '';
     }
 
     public function columnsDB() {
-        return '\"' . "id" . '\",' . '\"' . "creador" . '\",' . '\"' . "nombre" . '\",' . '\"' . "descripcion" . '\",' .
+        return '\"' . "creador" . '\",' . '\"' . "nombre" . '\",' . '\"' . "descripcion" . '\",' .
                 '\"' . "longitud" . '\",' . '\"' . "latitud" . '\",' . '\"' . "altitud" . '\"';
     }
 
