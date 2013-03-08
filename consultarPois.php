@@ -41,7 +41,7 @@ and open the template in the editor.
             ?>
             <input type="hidden" name="eliminarPOI" value= <?= $poi->getId() ?>></input>
     
-          <button type="submit" onclick="confirmation('Seguro deseas eliminar este POI?');">Eliminar</button>
+          <button type="submit" onclick="confirm('Seguro deseas eliminar este POI?');">Eliminar</button>
         <?php } ?>
         </Form>
         
