@@ -14,14 +14,14 @@ INSERT INTO "USB".pois ("creator", "nombre", "descripcion", "longitud", "latitud
 ('admin' , 'lugar3' , 'Este es un lugar x' , 10.034432 , 12.123342, 23.9124 );
 INSERT INTO "USB".pois ("creator", "nombre", "descripcion", "longitud", "latitud" , "altitud")  VALUES
 ('admin' , 'lugar4' , 'Este es un lugar x' , 10.934432 , 12.023342, 23.8124 );
-INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Entretenimiento', 1);
-INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Dulcerias', 2);
-INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Dulcerias', 3);
-INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Entretenimiento', 4);
-INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Sala de Lectura', 1);
-INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Dulcerias', 4);
-INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('www.ldc.usb.ve/ar0811031','Imagen', '', 1);
-INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('www.ldc.usb.ve/ar0811031','Imagen', '', 2);
-INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('','Texto', 'Holaaa', 3);
-INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('www.ldc.usb.ve/ar0811031/algo.mp4','Video', '', 4);
-INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('','Texto', 'Hola hola', 5);
+INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Entretenimiento', 5);
+INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Dulcerias', 5);
+INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Dulcerias', 6);
+INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Entretenimiento', 7);
+INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Sala de Lectura', 8);
+INSERT INTO "USB".categorias_poi ("nombre", "poi")  VALUES ( 'Dulcerias', 8);
+INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('www.ldc.usb.ve/ar0811031','Imagen', '', 5);
+INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('www.ldc.usb.ve/ar0811031','Imagen', '', 5);
+INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('','Texto', 'Holaaa', 6);
+INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('www.ldc.usb.ve/ar0811031/algo.mp4','Video', '', 7);
+INSERT INTO "USB".multimedia_poi ("enlace", "tipo", "descripcion", "poi" ) VALUES ('','Texto', 'Hola hola', 8);

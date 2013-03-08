@@ -35,9 +35,12 @@ class Categoria {
         return '\"' . 'nombre' . '\"' ;
     }
     
-     public function getId() {
+     public function getIdName() {
         return '\"' . 'nombre' . '\"' ;
     }
 
+         public function getId() {
+        return '\"' . $nombre . '\"' ;
+    }
 }
 ?>
