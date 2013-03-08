@@ -27,13 +27,13 @@ and open the template in the editor.
             array_push($poiArray, $poi);
         }
         foreach ($poiArray as $poi) {
-            echo $poi->getId() . "<br>";
-            echo $poi->getCreador() . "<br>";
-            echo $poi->getAltitud() . "<br>";
-            echo $poi->getLongitud() . "<br>";
-            echo $poi->getLatitud() . "<br>";
-            echo $poi->getDescripcion() . "<br>";
-            echo $poi->getNombre() . "<br>";
+            echo "Id poi". $poi->getId() . "<br>";
+            echo "Creador poi". $poi->getCreador() . "<br>";
+            echo "Nombre Poi". $poi->getNombre() . "<br>";
+            echo "Altitus poi". $poi->getAltitud() . "<br>";
+            echo "Longitud poi".$poi->getLongitud() . "<br>";
+            echo "Latitus poi".$poi->getLatitud() . "<br>";
+            echo "Descripcion poi". $poi->getDescripcion() . "<br>";
         }
         ?>
         

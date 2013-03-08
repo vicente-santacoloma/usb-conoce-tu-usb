@@ -21,7 +21,7 @@ and open the template in the editor.
             array_push($categoriaArray,$categoria);
         }
         foreach ($categoriaArray as $categoria) {
-            echo $categoria->getNombre()."<br>";
+            echo "Nombre Cat".$categoria->getNombre()."<br>";
         }
         ?>
     </body>
