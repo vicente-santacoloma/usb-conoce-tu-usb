@@ -26,7 +26,11 @@ and open the template in the editor.
             $poi->setNombre($data->nombre);
             array_push($poiArray, $poi);
         }
+        ?>
+        <Form Name ="formEliminar" Method ="POST" ACTION = "eliminarPOI.php">
+        <?php 
         foreach ($poiArray as $poi) {
+       
             echo "Id poi". $poi->getId() . "<br>";
             echo "Creador poi". $poi->getCreador() . "<br>";
             echo "Nombre Poi". $poi->getNombre() . "<br>";
@@ -34,8 +38,12 @@ and open the template in the editor.
             echo "Longitud poi".$poi->getLongitud() . "<br>";
             echo "Latitus poi".$poi->getLatitud() . "<br>";
             echo "Descripcion poi". $poi->getDescripcion() . "<br>";
-        }
-        ?>
+            ?>
+            <input type="hidden" name="eliminarPOI" value= <?= $poi->getId() ?>></input>
+    
+          <button type="submit" onclick="confirmation('Seguro deseas eliminar este POI?');">Eliminar</button>
+        <?php } ?>
+        </Form>
         
     </body>
 </html>
