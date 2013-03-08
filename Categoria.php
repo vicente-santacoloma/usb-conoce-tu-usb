@@ -7,6 +7,7 @@
 class Categoria {
 
     private $nombre;
+    private $id;
     
     private $table = "categoria";
 
@@ -33,5 +34,10 @@ class Categoria {
     public function columnsDB() {
         return '\"' . 'nombre' . '\"' ;
     }
+    
+     public function getId() {
+        return '\"' . 'nombre' . '\"' ;
+    }
+
 }
 ?>
