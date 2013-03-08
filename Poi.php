@@ -17,8 +17,7 @@ class Poi {
     private $multimedia;
     private $categorias;
     private $table = "pois";
-    
-    
+
     public function getTable() {
         return $this->table;
     }
@@ -27,7 +26,7 @@ class Poi {
         $this->table = $table;
     }
 
-        public function getId() {
+    public function getId() {
         return $this->id;
     }
 
@@ -84,13 +83,17 @@ class Poi {
     }
 
     public function valuesDB() {
-        return '' . $id . ',' . '\"' . $creator . '\",' . '\"' . $nombre . '\",' . '\"' . $descripcion . '\",' .
-                '' .$longitud . ',' . '' . $latitud . ',' . '' . $altitud . '';
+        return '\"' . $creator . '\",' . '\"' . $nombre . '\",' . '\"' . $descripcion . '\",' .
+                '' . $longitud . ',' . '' . $latitud . ',' . '' . $altitud . '';
     }
 
     public function columnsDB() {
-        return '\"' . "id" . '\",' . '\"' . "creador" . '\",' . '\"' . "nombre" . '\",' . '\"' . "descripcion" . '\",' .
+        return '\"' . "creador" . '\",' . '\"' . "nombre" . '\",' . '\"' . "descripcion" . '\",' .
                 '\"' . "longitud" . '\",' . '\"' . "latitud" . '\",' . '\"' . "altitud" . '\"';
+    }
+
+    public function getIdName() {
+        return '\"' . 'id' . '\"';
     }
 
 }

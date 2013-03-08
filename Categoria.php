@@ -7,8 +7,9 @@
 class Categoria {
 
     private $nombre;
+    private $id;
     
-    private $table = "categoria";
+    private $table = "categorias";
 
     public function getTable() {
         return $this->table;
@@ -27,11 +28,19 @@ class Categoria {
     }
 
     public function valuesDB() {
-        return '' . $nombre . '' ;
+        return '' . $this->nombre . '' ;
     }
 
     public function columnsDB() {
         return '\"' . 'nombre' . '\"' ;
+    }
+    
+     public function getIdName() {
+        return '\"' . 'nombre' . '\"' ;
+    }
+
+         public function getId() {
+             return $this->nombre;
     }
 }
 ?>

@@ -18,6 +18,7 @@ class Multimedia {
     private $poi;
     private $descripcion;
     private $table = "multimedia_poi";
+
     public function getTable() {
         return $this->table;
     }
@@ -26,7 +27,7 @@ class Multimedia {
         $this->table = $table;
     }
 
-        public function getId() {
+    public function getId() {
         return $this->id;
     }
 
@@ -67,13 +68,17 @@ class Multimedia {
     }
 
     public function valuesDB() {
-        return '' . $id . ',' . '\"' . $enlace . '\",' . '\"'
-                . $tipo . '\",' . '\"' . $descripcion . '\",'. '\"' . $poi->getId() . '\"';
+        return '\"' . $enlace . '\",' . '\"'
+                . $tipo . '\",' . '\"' . $descripcion . '\",' . '\"' . $poi->getId() . '\"';
     }
 
     public function columnsDB() {
-        return '\"' . "id" . '\",' . '\"' . "enlace" . '\",'
-                . '\"' . "tipo" . '\",' . '\"' . "descripcion" . '\",' . '\"'. "poi" . '\"';
+        return '\"' . "enlace" . '\",'
+                . '\"' . "tipo" . '\",' . '\"' . "descripcion" . '\",' . '\"' . "poi" . '\"';
+    }
+
+    public function getIdName() {
+        return '\"' . 'id' . '\"';
     }
 
 }
