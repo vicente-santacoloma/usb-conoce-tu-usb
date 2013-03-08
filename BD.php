@@ -34,6 +34,16 @@ class BD {
         $this->desconectarse($conexion);
     }
 
+    public function agregarCategoriaAPoi($elem1,$elem2) {
+        $conexion = $this->conectarse();
+        $query = "INSERT INTO " . $this->schema . "categorias_poi ( nombre , poi ) VALUES (" . $elem1->getNombre() . ", ". $elem2->getId() .")";
+        $result = pg_query($conexion, $query);
+        if (!$result) {
+            echo "No se pudo agregar el elemento";
+        }
+        $this->desconectarse($conexion);
+    }
+
     public function eliminarElem($elem) {
         $conexion = $this->conectarse();
         $query = " DELETE FROM " . $this->schema . "." . $elem->getTable() . " WHERE " . $elem->idname() . " = " . $elem->getId();
@@ -60,6 +70,17 @@ class BD {
             echo "No se pudo modificar el elemento";
         }
         $this->desconectarse($conexion);
+    }
+
+    // Para saber el valor del ID guardado
+    function insertId($pg_result, $serial_column, $table)
+    {
+        $conexion = $this->conectarse();
+        $oid = pg_last_oid($pg_result);
+        $query = "SELECT $serial_column FROM $table WHERE oid = $oid";
+        $result = pg_query($conexion,$query);
+        $row = pg_fetch_row($result, 0);
+        return($row[0]);
     }
 
 }
