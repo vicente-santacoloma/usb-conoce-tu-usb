@@ -8,8 +8,8 @@
 	$poi_lat = $_POST['latitud'];
 	$poi_alt = $_POST['altitud'];
 	$poi_creador = $_POST['creador'];
-	$poi_categorias = $_POST['categorias'];
-	$poi_multimedia = $_POST['multimedia']
+	$poi_categorias = $_POST['categoria'];
+	$poi_multimedia = $_POST['multimedia'];
 
 
 	$poi = new Poi();
@@ -20,9 +20,11 @@
 	$poi->setLatitud($poi_lat);
 	$poi->setCreador($poi_creador);
 	$bd = new BD();
-	$bd->conectarse;
+
 
 	$result = $bd->agregarElem($poi); //Adding the POI
+
+	/*
 	$id_poi_result = $bd->insertId($result,"id",$poi->getTable());
 	//Now we should add its categories
 	foreach ($poi_categorias as $cat) {
@@ -38,6 +40,6 @@
 
 	$multimedia->setPoi($id_poi_result);
 	$bd->agregarElem($multimedia)
-
+	*/
 
 ?>

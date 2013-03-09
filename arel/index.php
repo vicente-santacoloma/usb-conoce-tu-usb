@@ -44,13 +44,6 @@
 		  });
 		});
 
-		$("#addForm").submit(function() {
-			$("#longitud").value = arel.LLA.getLongitude();
-			$("#latitud").value = arel.LLA.getLatitude();
-			$("#altitud").value = arel.LLA.getAltitude();
-			$("#creador").value = "admin";
-		});
-
 
 		function hideAll() {
 			$("#addForm").hide();
@@ -78,9 +71,9 @@
 						<div class="label">Search (Locally):</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>				
 					</form>
 				</div>
-				<form id="addForm" name="input" >
-					Nombre: <input id="nombre" type="text" name="nombre"><br>
-					Descripcion: <input id="descripcion" type="text" name="descripcion">
+				<form id="addForm" name="input" action="html_form_action.asp" method="post">
+					Nombre: <input type="text" name="nombre"><br>
+					Descripcion: <input type="text" name="descripcion">
 					Multimedia: </br>
 					<input class="text" type="radio" name="multimedia" value="texto">Texto
 					<input class="link" type="radio" name="multimedia" value="imagen">Imagen
@@ -90,18 +83,13 @@
 						<p id ="content">Texto:</p><input id="inputContent" type="text" name="contenido">
 					</div>
 					Categorias: </br>
-					<input type="checkbox" name="categoria" value="Entretenimiento" >Entretenimiento<br>
-					<input type="checkbox" name="categoria" value="Comida" >Comida<br>
-					<input type="checkbox" name="categoria" value="Deportes" >Deportes<br>
-					<input type="checkbox" name="categoria" value="Bibliotecas" >Bibliotecas<br>
-					<input type="checkbox" name="categoria" value="Dulcerias" >Dulcerias<br>
-					
-					<input id="longitud" type="hidden" name="longitud">
-					<input id="latitud" type="hidden" name="latitud">
-					<input id="altitud" type="hidden" name="altitud">
-					<input id="creador" type="hidden" name="creador">
-
-					<input id="create" type="submit" value="Create">
+					<?php
+						$categorias = BD::consultarElem(new Categoria());
+						foreach ($categorias as $value) {
+						?>
+						<input type="checkbox" name="categoria" value=<?php echo $value->nombre; ?> ><?php echo $value->nombre; ?><br>
+					<?php   } ?>
+					<input type="submit" value="Create">
 				</form>
 				<div id="buttonOptions">
 					<button id="filterButton">Filtrar</button>
