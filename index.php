@@ -110,8 +110,8 @@ foreach($poiArray3 as $prepoi)
 	$latitude = $prepoi->getLatitud();
 	$altitude = $prepoi->getAltitud();
 
-	$junaioButtons = new array();
-	$multimediaPoiArray = $prepoi=>getMultimedia();
+	$junaioButtons = array();
+	$multimediaPoiArray = $prepoi->getMultimedia();
 	foreach($multimediaPoiArray as $multimedia) {
 
 		if($multimedia->getTipo() == "Texto") {

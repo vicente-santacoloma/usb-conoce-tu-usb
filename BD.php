@@ -47,7 +47,7 @@ class BD {
 
     public function eliminarElem($elem) {
         $conexion = $this->conectarse();
-        $query = " DELETE FROM " . $this->schema . "." . $elem->getTable() . " WHERE " . $elem->idname() . " = " . $elem->getId();
+        $query = " DELETE FROM " . $this->schema . "." . $elem->getTable() . " WHERE " . $elem->getIdName() . " = " . $elem->getId();
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo eliminar el elemento";
