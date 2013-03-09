@@ -3,7 +3,7 @@ var oFilter;
 arel.sceneReady(function()
 {
 	//Just for Debuging purposes
-	//arel.Debug.activate();
+	//arel.fDebug.activate();
 	//arel.Debug.deactivateArelLogStream();
 	
 	oFilter = new ArelFilter();
@@ -28,9 +28,13 @@ function ArelFilter()
 			//init GUI stuff
 			$('#searchlocal').keypress(function(e) { return that.keyControl(e); });		
 			$('#filter').change(function() { that.filterServer($('#filter').val()); return true; });
+			$('#create').keypress(function() { that.filterServer($('#filter').val()); return true; });	
 			
 			$('.filterbuttonArea a.filterButton').click(function() {
-				$('.filterOptionsInner').slideToggle(900);				
+				$('.filterOptionsInner').slideToggle(900);
+	
+
+			
 		    });			
 		}
 		catch(e)
@@ -98,6 +102,37 @@ function ArelFilter()
 		//make a request to the server
 		arel.Scene.triggerServerCall(true, {"filter_value" : val, "filter_filtered": "true"}, false);		
 	};
+
+	this.AddPoiServer = function(val)
+	{	
+		var nombreValue = $("#nombre").val();
+		var descripcionValue = $("#descripcion").val();
+		var longitudValue = ;
+		var latitudValue = ;
+		var altitudValue = ;
+
+		$("#create").click(function() {
+  			$.post("demo_test_post.asp",
+  			{
+    			nombre:nombreValue,
+    			descripcion:nombreValue,
+			longitud:longitudValue,
+			latitud:latitudValue,
+			altitud:altitudValue,
+  			},
+  			function(){
+    				alert("El POI ha sido creado exitosamente");
+  			});
+		});
+		//make a request to the server
+		//arel.Scene.triggerServerCall(true, {"filter_value" : val, "filter_filtered": "true"}, false);		
+	};
+
+	this.DeletePoiServer = function(val)
+	{	
+		//make a request to the server
+		arel.Scene.triggerServerCall(true, {"filter_value" : val, "filter_filtered": "true"}, false);		
+	};
 	
 	this.keyControl = function(oEvent) {
 		
@@ -127,3 +162,4 @@ function ArelFilter()
 	
 	this.init();
 }
+

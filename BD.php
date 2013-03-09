@@ -3,7 +3,7 @@
 class BD {
 
     private $schema = "\"USB\"";
-    private $test_local = true;
+    private $test_local = false;
 
     public function conectarse() {
         if ($this->test_local) {
@@ -96,6 +96,7 @@ class BD {
         $query = "SELECT $serial_column FROM $table WHERE oid = $oid";
         $result = pg_query($conexion, $query);
         $row = pg_fetch_row($result, 0);
+	$this->desconectarse($conexion);
         return($row[0]);
     }
 

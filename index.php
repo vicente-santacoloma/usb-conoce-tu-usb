@@ -5,25 +5,17 @@
  * @author     Frank Angermann
  **/
 
-session_start();
-
 require_once '../ARELLibrary/arel_xmlhelper.class.php';
 
+session_start();
 
 if(!empty($_GET['l']))
 	$position = explode(",", $_GET['l']);
 else
 	trigger_error("user position (l) missing. For testing, please provide a 'l' GET parameter with your request. e.g. pois/search/?l=23.34534,11.56734,0");
 
-$categorias = array("Entretenimiento", "Comida");
-
-apc_store('categorias',$categorias);
-
 //create the xml start
 ArelXMLHelper::start(NULL, "/arel/index.phtml");
-
-
-
 
 //start by defining some positions of geo referenced POIs and give those names and thumbnails
 $treasureLocations = array(

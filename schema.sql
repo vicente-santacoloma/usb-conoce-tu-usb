@@ -1,11 +1,11 @@
- ALTER USER "08-11031" WITH ENCRYPTED PASSWORD 'rausb';
+ALTER USER "08-11031" WITH ENCRYPTED PASSWORD 'rausb';
  
- DROP SCHEMA "USB" CASCADE;
+DROP SCHEMA "USB" CASCADE;
  
- CREATE SCHEMA "USB"
+CREATE SCHEMA "USB"
   AUTHORIZATION "08-11031";
 
- GRANT ALL ON SCHEMA "USB" TO "08-11031";
+GRANT ALL ON SCHEMA "USB" TO "08-11031";
  
 CREATE TABLE "USB".categorias(
     nombre varchar(30)  NOT NULL,
@@ -25,7 +25,7 @@ CREATE SEQUENCE "USB".idpois_sequence
   START 1
   CACHE 1;
 
- CREATE TABLE "USB".pois(
+CREATE TABLE "USB".pois(
      id INTEGER NOT NULL DEFAULT nextval('"USB".idpois_sequence'::regclass),
      creator VARCHAR(50) NOT NULL DEFAULT 'admin',
      nombre VARCHAR(30) NOT NULL, 
@@ -41,7 +41,7 @@ ALTER TABLE "USB".pois
   OWNER TO "08-11031";
 
 
- CREATE TABLE "USB".categorias_poi(
+CREATE TABLE "USB".categorias_poi(
      nombre varchar(30) NOT NULL,
      poi INTEGER NOT NULL,
      CONSTRAINT "FK_categorias_poi_poi" FOREIGN KEY (poi) REFERENCES "USB".pois(id) MATCH SIMPLE
@@ -54,7 +54,6 @@ OIDS=FALSE
 );
 ALTER TABLE "USB".categorias_poi
   OWNER TO "08-11031";
-  
   
 CREATE SEQUENCE "USB".idmultimedia
   INCREMENT 1

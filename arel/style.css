@@ -17,7 +17,7 @@ body
 	position: absolute;
 	bottom: 5px;
 	background-color: #333;
-	-webkit-box-shadow: 2px 2px 4px #666;
+	-webkit-box-shadow: 4px 4px 8px #666;
 	opacity: 0.8;
 }
 
@@ -57,3 +57,4 @@ a, a:hover, a:visited
 	display: none;
 	
 }
+
