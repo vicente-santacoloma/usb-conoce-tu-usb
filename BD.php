@@ -26,7 +26,18 @@ class BD {
 
     public function agregarElem($elem) {
         $conexion = $this->conectarse();
-        $query = "INSERT INTO " . $this->schema . "." . $elem->getTable() . "  (" . $elem->columnsDB() . ") VALUES (" . $elem->valuesDB() . ")";
+        $query = "INSERT INTO " . $this->schema . "." . $elem->getTable() 
+                . "(" .  $elem->columnsDB() . ")" . "VALUES (" . $elem->valuesDB() . ")";
+        $result = pg_query($conexion, $query);
+        if (!$result) {
+            echo "No se pudo agregar el elemento";
+        }
+        $this->desconectarse($conexion);
+    }
+
+    public function agregarCategoriaAPoi($elem1, $elem2) {
+        $conexion = $this->conectarse();
+        $query = "INSERT INTO " . $this->schema . "categorias_poi ( nombre , poi ) VALUES (" . $elem1->getNombre() . ", " . $elem2->getId() . ")";
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo agregar el elemento";
@@ -66,16 +77,26 @@ class BD {
         $conexion = $this->conectarse();
         $query = " SELECT p.id, p.creator, p.nombre as nombrepoi, c.nombre as nombrecat, p.descripcion, p.altitud, 
                 p.longitud, p.latitud FROM " . $this->schema . "." .
-                "pois p " . "," . $this->schema . "." . "categorias_poi c" . " WHERE p.id=c.poi".
-                ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" )."   ORDER BY p.id";
+                "pois p " . "," . $this->schema . "." . "categorias_poi c" . " WHERE p.id=c.poi" .
+                ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" ) . "   ORDER BY p.id";
 
         $query2 = " SELECT p.id, m.enlace, m.tipo, m.descripcion FROM " . $this->schema . "." .
                 "pois p" . "," . $this->schema . "." . "multimedia_poi m" . " WHERE p.id=m.poi" .
-                ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" )."  ORDER BY p.id";
+                ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" ) . "  ORDER BY p.id";
         $result1 = pg_query($conexion, $query);
         $result2 = pg_query($conexion, $query2);
         $this->desconectarse($conexion);
         return array($result1, $result2);
+    }
+
+    // Para saber el valor del ID guardado
+    function insertId($pg_result, $serial_column, $table) {
+        $conexion = $this->conectarse();
+        $oid = pg_last_oid($pg_result);
+        $query = "SELECT $serial_column FROM $table WHERE oid = $oid";
+        $result = pg_query($conexion, $query);
+        $row = pg_fetch_row($result, 0);
+        return($row[0]);
     }
 
 }

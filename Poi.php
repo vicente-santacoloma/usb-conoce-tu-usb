@@ -99,17 +99,17 @@ class Poi {
     }
 
     public function valuesDB() {
-        return '' . $id . ',' . '\"' . $creator . '\",' . '\"' . $nombre . '\",' . '\"' . $descripcion . '\",' .
-                '' . $longitud . ',' . '' . $latitud . ',' . '' . $altitud . '';
+        return "'" . $this->creador . "','" . $this->nombre . "','"  . $this->descripcion . "','" .
+               $this->longitud . "','"  . $this->latitud . "','" . $this->altitud . "'";
     }
 
     public function columnsDB() {
-        return '\"' . "id" . '\",' . '\"' . "creador" . '\",' . '\"' . "nombre" . '\",' . '\"' . "descripcion" . '\",' .
-                '\"' . "longitud" . '\",' . '\"' . "latitud" . '\",' . '\"' . "altitud" . '\"';
+        return '"' . "creator" . '",' . '"' . "nombre" . '",' . '"' . "descripcion" . '",' .
+                '"' . "longitud" . '",' . '"' . "latitud" . '",' . '"' . "altitud" . '"';
     }
 
     public function getIdName() {
-        return '\"' . 'id' . '\"';
+        return '"' . 'id' . '"';
     }
 
 }
