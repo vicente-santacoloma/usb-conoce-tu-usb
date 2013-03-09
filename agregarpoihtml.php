@@ -9,7 +9,9 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+
         <form id="addForm"  action="agregarPOI.php" method="POST">
+
             Nombre: <input id="nombre" type="text" name="nombre" ><br>
             Descripcion: <input id="descripcion" type="text" name="descripcion">
             Multimedia: </br>

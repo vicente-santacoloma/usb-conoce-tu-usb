@@ -3,7 +3,7 @@ var oFilter;
 arel.sceneReady(function()
 {
 	//Just for Debuging purposes
-	//arel.Debug.activate();
+	arel.Debug.activate();
 	//arel.Debug.deactivateArelLogStream();
 	
 	oFilter = new ArelFilter();
