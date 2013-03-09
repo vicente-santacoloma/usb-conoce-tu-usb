@@ -26,8 +26,8 @@ class BD {
 
     public function agregarElem($elem) {
         $conexion = $this->conectarse();
-        $query = "INSERT INTO " . $this->schema . "." . $elem->getTable() 
-                . "(" .  $elem->columnsDB() . ")" . "VALUES (" . $elem->valuesDB() . ")";
+        $query = "INSERT INTO " . $this->schema . "." . $elem->getTable()
+                . "(" . $elem->columnsDB() . ")" . "VALUES (" . $elem->valuesDB() . ")";
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo agregar el elemento";
@@ -96,8 +96,39 @@ class BD {
         $query = "SELECT $serial_column FROM $table WHERE oid = $oid";
         $result = pg_query($conexion, $query);
         $row = pg_fetch_row($result, 0);
-	$this->desconectarse($conexion);
+        $this->desconectarse($conexion);
         return($row[0]);
+    }
+
+    public function consultarIdPoi(Poi $poi) {
+        $conexion = $this->conectarse();
+        $query = 'SELECT MAX(id) as id FROM "USB".pois'; //Es el ultimo agregado
+        $result = pg_query($conexion, $query);
+        $poi->setId(pg_fetch_object($result)->id);
+        return $poi;
+    }
+
+    public function agregarCategoriasPoi(Poi $poi) {
+        $conexion = $this->conectarse();
+        $categorias = $poi->getCategorias();
+        foreach ($categorias as $categoria) {
+            $query = 'INSERT INTO "USB".categoria_pois ( ' . $categoria->columnsDB() . ', poi'
+                    . ') VALUES (' . $categoria->valuesDB() . ',' . $poi->getId() . ')';
+            $result = pg_query($conexion, $query);
+        }
+        $this->desconectarse($conexion);
+    }
+
+    public function agregarMultimediaPoi(Poi $poi) {
+        $conexion = $this->conectarse();
+        $multimedias = $poi->getMultimedia();
+        foreach ($multimedias as $multimedia) {
+            $multimedia->getPoi($poi);
+            $query = 'INSERT INTO "USB".multimedia_poi ( ' . $multimedia->columnsDB()
+                    . ') VALUES (' . $multimedia->valuesDB() . ')';
+            $result = pg_query($conexion, $query);
+        }
+        $this->desconectarse($conexion);
     }
 
 }

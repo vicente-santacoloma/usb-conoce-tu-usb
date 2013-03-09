@@ -68,13 +68,13 @@ class Multimedia {
     }
 
     public function valuesDB() {
-        return '\"' . $enlace . '\",' . '\"'
-                . $tipo . '\",' . '\"' . $descripcion . '\",' . '\"' . $poi->getId() . '\"';
+        return '"' . $this->enlace . '",' . '"'
+                . $this->tipo . '",' . '"' . $this->descripcion . '",'  . $poi->getId()  ;
     }
 
     public function columnsDB() {
-        return '\"' . "enlace" . '\",'
-                . '\"' . "tipo" . '\",' . '\"' . "descripcion" . '\",' . '\"' . "poi" . '\"';
+        return '"' . 'enlace' . '",'
+                . '"' . 'tipo' . '",' . '"' .'descripcion' . '",' . '"' . 'poi' . '"';
     }
 
     public function getIdName() {

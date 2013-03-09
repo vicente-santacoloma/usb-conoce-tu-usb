@@ -32,10 +32,12 @@ echo $poi_nombre . $poi_desc . $poi_long . $poi_lat . $poi_alt . $poi_creador . 
 	$poi->setLatitud($poi_lat);
 	$poi->setCreador($poi_creador);
 	$bd = new BD();
-
-
+        
 	$result = $bd->agregarElem($poi); //Adding the POI
-
+        $poi = $bd->consultarIdPoi($poi); //Adding the id of the poi
+        $bd->agregarCategoriasPoi($poi);
+        $bd->agregarMultimediaPoi($poi);
+        
 	/*
 	$id_poi_result = $bd->insertId($result,"id",$poi->getTable());
 	//Now we should add its categories
@@ -45,10 +47,10 @@ echo $poi_nombre . $poi_desc . $poi_long . $poi_lat . $poi_alt . $poi_creador . 
 		$bd->agregarCategoriaAPoi($categoria->getNombre(),$id_poi_result);
 	}
 
-$bd = new BD();
-$bd->conectarse;
+        $bd = new BD();
+        $bd->conectarse;
 
-// Se deben setear los demas atributos
+        // Se deben setear los demas atributos
 
 	$multimedia->setPoi($id_poi_result);
 	$bd->agregarElem($multimedia)
