@@ -3,7 +3,7 @@ var oFilter;
 arel.sceneReady(function()
 {
 	//Just for Debuging purposes
-	arel.Debug.activate();
+	//arel.Debug.activate();
 	//arel.Debug.deactivateArelLogStream();
 	
 	oFilter = new ArelFilter();
@@ -24,14 +24,18 @@ function ArelFilter()
 		{
 			//get all objects (we will need them for the local search)
 			this.allObjects = arel.Scene.getObjects();	
-			
+
 			//init GUI stuff
 			$('#searchlocal').keypress(function(e) { return that.keyControl(e); });		
 			$('#filter').change(function() { that.filterServer($('#filter').val()); return true; });
 			
+			$('#create').click(function() { that.addPOIServer(); return true; });
+
+			$('#delete').click(function() { that.deletePOIServer(); return true; });
+
 			$('.filterbuttonArea a.filterButton').click(function() {
 				$('.filterOptionsInner').slideToggle(900);				
-		    });			
+		    	});			
 		}
 		catch(e)
 		{
@@ -97,6 +101,37 @@ function ArelFilter()
 		
 		//make a request to the server
 		arel.Scene.triggerServerCall(true, {"filter_value" : val, "filter_filtered": "true"}, false);		
+	};
+
+	this.addPOIServer = function()
+	{
+		//arel.Debug.log(val);
+		
+		//make a request to the server
+
+		var nombre = $("#nombre").val();
+		var descripcion = $("#descripcion").val(); 
+		var multimedia = $('input[name=multimedia]:checked').val();
+		var contenido_multimedia = $("#inputContent").val();		
+		var categorias_string = "";
+
+		for(var i = 0; i < categorias.length; i++) {
+			categorias_string = categorias_string + "," + categorias[i];			
+		}
+
+		arel.Scene.triggerServerCall(true, {"filter_operation" : "add", "filter_nombre": nombre, "filter_descripcion" : descripcion, 
+		"filter_multimedia" : multimedia ,"filter_contenido_multimedia" : contenido_multimedia, "filter_categorias" : categorias_string}, false);		
+	};
+
+	this.deletePOIServer = function()
+	{
+		//arel.Debug.log(val);
+		
+		//make a request to the server
+
+		var poi_id = $("#delete_poi").val();
+
+		arel.Scene.triggerServerCall(true, {"filter_operation" : "delete", "filter_poi_id": poi_id}, false);		
 	};
 	
 	this.keyControl = function(oEvent) {

@@ -47,7 +47,7 @@ class BD {
 
     public function eliminarElem($elem) {
         $conexion = $this->conectarse();
-        $query = " DELETE FROM " . $this->schema . "." . $elem->getTable() . " WHERE " . $elem->idname() . " = " . $elem->getId();
+        $query = "DELETE FROM " . $this->schema . "." . $elem->getTable() . " WHERE " . $elem->getIdName() . " = '" . $elem->getId() . "'";
         $result = pg_query($conexion, $query);
         if (!$result) {
             echo "No se pudo eliminar el elemento";
@@ -58,6 +58,14 @@ class BD {
     public function consultarElem($elem) {
         $conexion = $this->conectarse();
         $query = " SELECT * FROM " . $this->schema . "." . $elem->getTable() . ($elem->getId() ? " WHERE " . $elem->getIdName() . " = " . $elem->getId() : "" );
+        $result = pg_query($conexion, $query);
+        $this->desconectarse($conexion);
+        return $result;
+    }
+
+		public function consultarMisPois($user) {
+        $conexion = $this->conectarse();
+        $query = " SELECT * FROM " . $this->schema . ".pois" . " WHERE creator = '" . $user . "'" ;
         $result = pg_query($conexion, $query);
         $this->desconectarse($conexion);
         return $result;
@@ -105,15 +113,14 @@ class BD {
         $query = 'SELECT MAX(id) as id FROM "USB".pois'; //Es el ultimo agregado
         $result = pg_query($conexion, $query);
         $poi->setId(pg_fetch_object($result)->id);
-        return $poi;
     }
 
     public function agregarCategoriasPoi(Poi $poi) {
         $conexion = $this->conectarse();
         $categorias = $poi->getCategorias();
         foreach ($categorias as $categoria) {
-            $query = 'INSERT INTO "USB".categoria_pois ( ' . $categoria->columnsDB() . ', poi'
-                    . ') VALUES (' . $categoria->valuesDB() . ',' . $poi->getId() . ')';
+            $query = 'INSERT INTO "USB".categorias_poi ( ' . $categoria->columnsDB() . ', "poi"'
+                    . ') VALUES (' . $categoria->valuesDB() . ",'" . $poi->getId() . "')";
             $result = pg_query($conexion, $query);
         }
         $this->desconectarse($conexion);

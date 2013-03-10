@@ -28,15 +28,15 @@ class Categoria {
     }
 
     public function valuesDB() {
-        return '' . $this->nombre . '' ;
+        return "'" . $this->nombre . "'" ;
     }
 
     public function columnsDB() {
-        return '\"' . 'nombre' . '\"' ;
+        return '"' . "nombre" . '"' ;
     }
     
      public function getIdName() {
-        return '\"' . 'nombre' . '\"' ;
+        return '"' . 'nombre' . '"' ;
     }
 
          public function getId() {

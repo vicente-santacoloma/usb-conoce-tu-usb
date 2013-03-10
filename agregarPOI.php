@@ -3,14 +3,24 @@
 	echo "Llegue !!!";
 	include ("BD.php");
 	include ("Poi.php");
+
+/*
+	require_once '../ARELLibrary/arel_xmlhelper.class.php';
+
+	if(!empty($_GET['l']))
+		$position = explode(",", $_GET['l']);
+	else
+		trigger_error("user position (l) missing. For testing, please provide a 'l' GET parameter with your request. e.g. pois/search/?l=23.34534,11.56734,0");	
+	*/
+
 	$poi_nombre = $_POST['nombre'];
 	$poi_desc = $_POST['descripcion'];
-	$poi_long = $_POST['longitud'];
-	$poi_lat = $_POST['latitud'];
-	$poi_alt = $_POST['altitud'];
+	//$poi_long = $position[0] //$_POST['longitud'];
+	//$poi_lat = $position[1] //$_POST['latitud'];
+	//$poi_alt = $position[2] //$_POST['altitud'];
 	$poi_creador = $_POST['creador'];
-	$poi_categorias = $_POST['categoria'];
-	$poi_multimedia = $_POST['multimedia'];
+	//$poi_categorias = $_POST['categoria'];
+	//$poi_multimedia = $_POST['multimedia'];
 
 	echo $poi_nombre . $poi_desc . $poi_long . $poi_lat . $poi_alt . $poi_creador . "<br><br>";
 

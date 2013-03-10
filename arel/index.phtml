@@ -1,101 +1,68 @@
 <html>
-    <head>
-    	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-       	<script type="text/javascript" src="http://dev.junaio.com/arel/js/arel.js"></script>
-    	<script type="text/javascript" src="logic_LBS9.js"></script>
-    	<link href="style.css" rel="stylesheet" type="text/css" />
-    	<title>First Arel</title>
+	<head>
+  	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://dev.junaio.com/arel/js/arel.js"></script>
+    <script type="text/javascript" src="logic_LBS9.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Conoce Tu USB</title>
 
-	<script>
-		$(document).ready(function(){
-		  hideAll();
+		<script>
+			var categorias = new Array();
 
-		  $("#filterButton").click(function(){
-   		    hideAll();
-		    $(".dropdown").show();
-		  });
+			$(document).ready(function() {
+		  	hideAll();
 
-		  $("#searchButton").click(function(){
-		    hideAll();
-		    $(".step").show();
-		  });
+		  	$("#filterButton").click(function() {
+   		  	hideAll();
+		    	$(".dropdown").show();
+		  	});
 
-		  $("#addButton").click(function(){
-		    hideAll();
-		    $("#addForm").show();
-		  });
+		  	$("#searchButton").click(function() {
+		    	hideAll();
+		    	$(".step").show();
+		  	});
 
-		  $("#deleteButton").click(function(){
-		    hideAll();
-		    $("#delete").show();
-		  });
+		  	$("#addButton").click(function() {
+		    	hideAll();
+		    	$("#addPOI").show();
+		  	});
 
-		  $(".text").click(function(){
-		    $("#content").text("Texto:");
-		    $("#multimediaContent").show();
-		  });
+		  	$("#deleteButton").click(function() {
+		    	hideAll();
+		    	$("#deletePOI").show();
+		  	});
 
-		  $(".link").click(function(){
-                    $("#content").text("Enlace:");
-		    //$("#inputContent").type("url");
-		    $("#multimediaContent").show();
-		  });
-  
-		  $("#create").click(function() {
-				//alert("tu mama");
-				/*
-				var nombre = $("#nombre").val();
-				var descripcion = $("#descripcion").val(); 
-				var enlace = $("#inputContent").val();
-				var longitud = 50.2;
-				var latitud = 50.2;
-				var altitud = 50.2;
-				var creador = "admin";
+		  	$(".text").click(function() {
+		    	$("#content").text("Texto:");
+		      //$("#inputContent").attr("type","text");
+		      $("#multimediaContent").show();
+		  	});
 
-				var dataString = 'nombre=' + nombre + '&descripcion=' 
-				+ descripcion + '&enlace=' + enlace + '&longitud=' 
-				+ longitud + '&latitud=' + latitud + '&altitud=' 
-				+ altitud + '&creador=' + creador;
+		  	$(".link").click(function(){
+        	$("#content").text("Enlace:");
+		    	//$("#inputContent").attr("type","url");
+		    	$("#multimediaContent").show();
+		  	});
 
-				$.ajax({
-					type: "POST",
-					url: "http://realidadaumentada.ldc.usb.ve/ar0811044/metaio-junaio-quickstarts-cb94ea8/ConoceTuUSB/agregarPOI.php",
-					data: dataString,
-					succes: function() {
-						alert("El POI fue creado exitosamente");
-					}			
-				});*/
-			
+				$(".categoria").click(function(){
+        	categorias.push($(this).val());
+		  	});
+			});
 
-				var form = $("#addForm");
-				$.ajax({
-					type: "POST",
-					url: "http://realidadaumentada.ldc.usb.ve/ar0811044/metaio-junaio-quickstarts-cb94ea8/ConoceTuUSB/agregarPOI.php",
-					data: form.serialize(),
-					succes: function(data) {
-						alert("El POI fue creado exitosamente");
-					}			
-				});
-
-				alert("El POI fue creado exitosamente");
-
-				//arel.Scene.triggerServerCall(true, {}, false);
-				//$("#longitud").value = arel.LLA.getLongitude();
-				//$("#latitud").value = arel.LLA.getLatitude();
-				//$("#altitud").value = arel.LLA.getAltitude();
-				//$("#creador").value = "admin";
-			}); 
-		});
-
-		function hideAll() {
-			$("#addForm").hide();
-			$(".dropdown").hide();
-			$(".step").hide();
-			$("#multimediaContent").hide();
-		};
-	</script>
-    </head>
+			function hideAll() {
+				$("#addPOI").hide();
+				$("#deletePOI").hide();
+				$(".dropdown").hide();
+				$(".step").hide();
+				$("#multimediaContent").hide();
+			};
+		</script>
+	</head>
+	<?php
+		include ("../BD.php");
+		include ("../Categoria.php");
+	?>
 	<body>
 		<div class="filteroptions">
 			<div class="filterbuttonArea">	
@@ -105,12 +72,20 @@
 				<div class="dropdown">
 					<div class="label">Filter (Server):</div>
 					<select id="filter">
-					  <option value="">All continents</option>
-					  <option value="Europe">Europe</option>
-					  <option value="Asia">Asia</option>
-					  <option value="NorthAmerica">North America</option>
-					  <option value="SouthAmerica">South America</option>
-					  <option value="Africa">Africa</option>
+						<option value="" > Escoge una categoria </option>
+						<?php
+							$bd = new BD();
+							$categoriaArray = array();
+							$resultSet = $bd->consultarElem(new Categoria());
+							while ($data = pg_fetch_object($resultSet)) {
+								$categoria = new Categoria();
+								$categoria->setNombre($data->nombre);
+								array_push($categoriaArray,$categoria);
+							}
+							foreach ($categoriaArray as $categoria) { ?>
+								<option value=<?php echo $categoria->getNombre(); ?> > <?php echo $categoria->getNombre(); ?></option>
+							<?php }
+						?>
 					</select> 
 				</div>
 				<div class="step">
@@ -118,49 +93,60 @@
 						<div class="label">Search (Locally):</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>				
 					</form>
 				</div>
-				<form id="addForm" name="input">
+				<div id="addPOI">
 					Nombre: <input id="nombre" type="text" name="nombre"><br>
 					Descripcion: <input id="descripcion" type="text" name="descripcion">
 					Multimedia: </br>
-					<input class="text" type="radio" name="multimedia" value="texto">Texto
-					<input class="link" type="radio" name="multimedia" value="imagen">Imagen
-					<input class="link" type="radio" name="multimedia" value="sonido">Sonido
-					<input class="link" type="radio" name="multimedia" value="video">Video<br>
+					<input class="text" type="radio" name="multimedia" value="Texto">Texto
+					<input class="link" type="radio" name="multimedia" value="Imagen">Imagen
+					<input class="link" type="radio" name="multimedia" value="Sonido">Sonido
+					<input class="link" type="radio" name="multimedia" value="Video">Video<br>
 					<div id="multimediaContent">
 						<p id ="content">Texto:</p><input id="inputContent" type="text" name="contenido">
 					</div>
 					Categorias: </br>
 					
 					<?php
-						include ("../BD.php");
-						include ("../Categoria.php");
 						$bd = new BD();
 						$categoriaArray = array();
 						$resultSet = $bd->consultarElem(new Categoria());
 						while ($data = pg_fetch_object($resultSet)) {
-						    $categoria = new Categoria();
-						    $categoria->setNombre($data->nombre);
-						    array_push($categoriaArray,$categoria);
+							$categoria = new Categoria();
+						  $categoria->setNombre($data->nombre);
+						  array_push($categoriaArray,$categoria);
 						}
 						foreach ($categoriaArray as $categoria) { ?>
-							<input type="checkbox" name="categoria" value=<?php echo $categoria->getNombre(); ?> >
+							<input class="categoria" type="checkbox" name="categoria" value=<?php echo $categoria->getNombre(); ?> >
 							<?php echo $categoria->getNombre(); ?><br>
 						<?php }
 					?>
+					<button id="create" >Crear</button>
+				</div>
 
-					<input id="longitud" type="hidden" name="longitud" value="50.20">
-					<input id="latitud" type="hidden" name="latitud" value="50.20">
-					<input id="altitud" type="hidden" name="altitud" value="50.20">
-					<input id="creador" type="hidden" name="creador" value="admin">
+				<div id="deletePOI">
+					<select id="delete_poi">
+						<option value="" > Escoge un poi </option>
+						<?php
+							$bd = new BD();
+							$resultSet = $bd->consultarMisPois("admin");
+							while ($data = pg_fetch_object($resultSet)) { ?>
+								<option value=<?php echo $data->id; ?> > <?php echo $data->nombre; ?></option>
+							<?php }
+						?>
+					</select>
+					<button id="delete" >Eliminar</button>
+				</div>
 
+				<div>
+				</div>
 
-					<input id="create" type="submit" value="Create">
-				</form>
-				<div id="buttonOptions">
+				<br>
+				<div id="buttonOptions" align="center">
 					<button id="filterButton">Filtrar</button>
 					<button id="searchButton">Buscar</button>
-					<button id="addButton">Agregar</button>
-					<button id="deleteButton">Eliminar</button>
+					<button id="addButton">Agregar POI</button>
+					<button id="deleteButton">Eliminar POI</button>
+					<button id="addMultimediaButton">Agregar Multimedia</button>
 				</div>
 			</div>			
 		</div>		
