@@ -12,6 +12,7 @@ and open the template in the editor.
         <?php
         include ("BD.php");
         include ("Poi.php");
+        $user = (is_null($_GET['uid']) ? 'admin' : $_GET['uid']);
         $bd = new BD();
         $poiArray = array();
         $resultSet = $bd->consultarElem(new Poi());
@@ -27,25 +28,16 @@ and open the template in the editor.
             array_push($poiArray, $poi);
         }
         ?>
-
-
-        <Form Name ="formEliminar" Method ="POST" ACTION = "eliminarPOI.php">
-            <?php
-            foreach ($poiArray as $poi) {
-
-                echo "Id poi" . $poi->getId() . "<br>";
-                echo "Creador poi" . $poi->getCreador() . "<br>";
-                echo "Nombre Poi" . $poi->getNombre() . "<br>";
-                echo "Altitud poi" . $poi->getAltitud() . "<br>";
-                echo "Longitud poi" . $poi->getLongitud() . "<br>";
-                echo "Latitud poi" . $poi->getLatitud() . "<br>";
-                echo "Descripcion poi" . $poi->getDescripcion() . "<br>";
+        <form  action="/ConoceTuUSB/eliminarpoilist.php" name="poi" method="POST">
+            <select name="id">
+                <option value="0" > Seleccione un Poi </option>
+                <?php
+                foreach ($poiArray as $poi) {
+                    ?> <option value=<?php echo $poi->getId();  ?> > <?php  echo $poi->getNombre(); ?> </option> <?php
+                }
                 ?>
-                <input type="hidden" name="eliminarPOI" value= <?= $poi->getId() ?>></input>
-
-                <button type="submit" onclick="confirm('Seguro deseas eliminar este POI?');">Eliminar</button>
-            <?php } ?>
-        </Form>
-
+            </select>
+            <input type="submit" value="eliminar" />
+        </form>
     </body>
 </html>
