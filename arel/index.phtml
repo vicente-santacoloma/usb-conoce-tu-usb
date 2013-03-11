@@ -56,6 +56,7 @@
 				$(".dropdown").hide();
 				$(".step").hide();
 				$("#multimediaContent").hide();
+				$("#addMultimedia").hide();
 			};
 		</script>
 	</head>
@@ -64,13 +65,14 @@
 		include ("../Categoria.php");
 	?>
 	<body>
-		<div class="filteroptions">
+		<div class="filterOptions">
 			<div class="filterbuttonArea">	
-				<a href="#" class="filterButton">Filter</a>
+				<a href="#" class="filterButton">Menu</a>
+				<img src="../resources/miniUSB.png" width="32" height="30" style="padding-left: 4px">
 			</div>
 			<div class="filterOptionsInner">
 				<div class="dropdown">
-					<div class="label">Filter (Server):</div>
+					<div class="label">Filtrado por:</div>
 					<select id="filter">
 						<option value="" > Escoge una categoria </option>
 						<?php
@@ -90,10 +92,10 @@
 				</div>
 				<div class="step">
 					<form>
-						<div class="label">Search (Locally):</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>				
+						<div class="label">Buscar:</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>				
 					</form>
 				</div>
-				<div id="addPOI">
+				<div id="addPOI" class="scroll form">
 					Nombre: <input id="nombre" type="text" name="nombre"><br>
 					Descripcion: <input id="descripcion" type="text" name="descripcion">
 					Multimedia: </br>
@@ -120,10 +122,11 @@
 							<?php echo $categoria->getNombre(); ?><br>
 						<?php }
 					?>
-					<button id="create" >Crear</button>
+					<button id="create" class="button green" >Crear</button>
+					<button id="cancel" class="button" >Cancelar</button>
 				</div>
 
-				<div id="deletePOI">
+				<div id="deletePOI" class="form">
 					<select id="delete_poi">
 						<option value="" > Escoge un poi </option>
 						<?php
@@ -134,19 +137,21 @@
 							<?php }
 						?>
 					</select>
-					<button id="delete" >Eliminar</button>
+					<button id="delete" class= "button red" >Eliminar</button>
 				</div>
 
-				<div>
+				<div id="addMultimedia" class ="form">
+	
+					<button id="addMulti" class ="button green">Agregar multimedia</button>
 				</div>
 
 				<br>
 				<div id="buttonOptions" align="center">
-					<button id="filterButton">Filtrar</button>
-					<button id="searchButton">Buscar</button>
-					<button id="addButton">Agregar POI</button>
-					<button id="deleteButton">Eliminar POI</button>
-					<button id="addMultimediaButton">Agregar Multimedia</button>
+					<button id="filterButton" class ="button purple">Filtrar</button>
+					<button id="searchButton" class ="button ">Buscar</button>
+					<button id="addButton" class="button green">Agregar POI</button>
+					<button id="deleteButton" class ="button red">Eliminar POI</button>
+					<button id="addMultimediaButton" class ="button green">Agregar Multimedia</button>
 				</div>
 			</div>			
 		</div>		

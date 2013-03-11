@@ -5,18 +5,20 @@ body
 	padding: 0;
 	-webkit-text-size-adjust: 100%;
 	background-color:transparent;
+	color: black;	
 }
 
 .filterOptions
 {
-	color: white;
+	color: black;
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
 	height: auto;
 	position: absolute;
 	bottom: 5px;
-	background-color: #333;
+  padding-right : 10px;
+	background-color: #FFD700;
 	-webkit-box-shadow: 2px 2px 4px #666;
 	opacity: 0.8;
 }
@@ -31,28 +33,78 @@ body
 	width: 140px;
 	text-align: left;
 	display: inline-block;
+
+
 }
 
+.filterButton{
+  font-family: Georgia, "Times New Roman", Times, serif;
+font-size: 30px;
+  color: black;
+  font:bold;
+}
 .filterbuttonArea
 {
-	padding: 10px;	
-	color: white;
+	padding: 10px;
 	opacity: 0.8;	
-	margin: 0 auto 0 auto;
-	width: 35px;
+	margin: 0 auto 0 0;
+	width: auto;
+
 }
 
 a, a:hover, a:visited
 {
 	text-align: center;
 	text-decoration: none; 
-	color: white;			
+	color: black;			
+}
+
+.scroll{
+overflow : auto;
+}
+
+.form {
+padding-bottom: 40px;
+height : 100px;
+width : auto;
+background-color: #B0C4DE;
+
+
 }
 
 .filterOptionsInner
 {
-	background-color: #333;
+	background-color: #E6E6FA;
 	padding: 10px;
 	height: auto;	
 	display: none;
+border-radius: 15px;
 }
+
+.button {
+	padding: 5px 10px;
+	display: inline;
+	background: #777 url(../resources/button.png) repeat-x bottom;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-shadow: 1px 1px #666;
+	}
+.button:hover {
+	background-position: 0 center;
+	}
+.button:active {
+	background-position: 0 top;
+	position: relative;
+	top: 1px;
+	padding: 6px 10px 4px;
+	}
+.button.red { background-color: #e50000; }
+.button.purple { background-color: #9400bf; }
+.button.green { background-color: #58aa00; }
+.button.blue { background-color: #2c6da0; }
+.button.orange { background-color: #ff9c00; }
