@@ -63,9 +63,9 @@ class BD {
         return $result;
     }
 
-		public function consultarMisPois($user) {
+	public function consultarMisPois($user) {
         $conexion = $this->conectarse();
-        $query = " SELECT * FROM " . $this->schema . ".pois" . " WHERE creator = '" . $user . "'" ;
+        $query = " SELECT * FROM " . $this->schema . ".pois" . " WHERE creador = '" . $user . "'" ;
         $result = pg_query($conexion, $query);
         $this->desconectarse($conexion);
         return $result;
@@ -83,7 +83,7 @@ class BD {
 
     public function consultarPoisFull(Poi $poi) {
         $conexion = $this->conectarse();
-        $query = " SELECT p.id, p.creator, p.nombre as nombrepoi, c.nombre as nombrecat, p.descripcion, p.altitud, 
+        $query = " SELECT p.id, p.creador, p.nombre as nombrepoi, c.nombre as nombrecat, p.descripcion, p.altitud, 
                 p.longitud, p.latitud FROM " . $this->schema . "." .
                 "pois p " . "," . $this->schema . "." . "categorias_poi c" . " WHERE p.id=c.poi" .
                 ($poi->getId() ? " AND p.id" . " = " . $poi->getId() : "" ) . "   ORDER BY p.id";

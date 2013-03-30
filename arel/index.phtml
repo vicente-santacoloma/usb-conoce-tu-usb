@@ -48,6 +48,36 @@
 				$(".categoria").click(function(){
         	categorias.push($(this).val());
 		  	});
+
+		  	$("#addMultimediaButton").click(function() {
+		    	hideAll();
+		    	$("#addMultimedia").show();
+		  	});
+
+		  	$(".textMulti").click(function() {
+		  		 $("#multimediaPOI").show();
+					$("#contenidoMultimediaEnlace").hide();
+		      $("#contenidoMultimedia").show();
+
+		     
+		  	});
+
+		  	$(".linkMulti").click(function() {
+		  		 $("#multimediaPOI").show();
+					$("#contenidoMultimedia").hide();
+		       $("#contenidoMultimediaEnlace").show();
+		  
+		  	});
+		  	$(".cancel").click(function()
+		  	{
+					hideAll();
+				//	$(".filterbuttonArea a.filterButton").click();
+				$(".filterOptionsInner").show();
+					
+		  	})
+
+
+
 			});
 
 			function hideAll() {
@@ -56,6 +86,10 @@
 				$(".dropdown").hide();
 				$(".step").hide();
 				$("#multimediaContent").hide();
+				$("#addMultimedia").hide();
+				$("#multimediaPOI").hide();
+				$("#contenidoMultimedia").hide();
+				$("#contenidoMultimediaEnlace").hide();
 			};
 		</script>
 	</head>
@@ -64,15 +98,17 @@
 		include ("../Categoria.php");
 	?>
 	<body>
-		<div class="filteroptions">
+		<div class="filterOptions">
 			<div class="filterbuttonArea">	
-				<a href="#" class="filterButton">Filter</a>
+				<a href="#" class="filterButton">Menu</a>
+				<img src="../resources/miniUSB.png" width="32" height="30" style="padding-left: 4px">
 			</div>
 			<div class="filterOptionsInner">
-				<div class="dropdown">
-					<div class="label">Filter (Server):</div>
+				<div class="dropdown form">
+					<div class="label">Filtrado por: Categoria</div>
 					<select id="filter">
-						<option value="" > Escoge una categoria </option>
+						<option value = "" > Escoge una </option>
+						<option value="Todas" > Todas </option>
 						<?php
 							$bd = new BD();
 							$categoriaArray = array();
@@ -87,17 +123,19 @@
 							<?php }
 						?>
 					</select> 
+						<button class="cancel button" >Cancelar</button>
 				</div>
-				<div class="step">
+				<div class="step form">
 					<form>
-						<div class="label">Search (Locally):</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>				
+						<div class="label">Buscar:</div><input type="text" id="searchlocal" autocorrect="off" autocapitalize="off"/>		
 					</form>
+				<button class="cancel button" >Cancelar</button>		
 				</div>
-				<div id="addPOI">
+				<div id="addPOI" class="scroll form">
 					Nombre: <input id="nombre" type="text" name="nombre"><br>
 					Descripcion: <input id="descripcion" type="text" name="descripcion">
 					Multimedia: </br>
-					<input class="text" type="radio" name="multimedia" value="Texto">Texto
+					<input class="text" type="radio" name="multimedia" value="texto">Texto
 					<input class="link" type="radio" name="multimedia" value="Imagen">Imagen
 					<input class="link" type="radio" name="multimedia" value="Sonido">Sonido
 					<input class="link" type="radio" name="multimedia" value="Video">Video<br>
@@ -120,10 +158,11 @@
 							<?php echo $categoria->getNombre(); ?><br>
 						<?php }
 					?>
-					<button id="create" >Crear</button>
+					<button id="create" class="button green" >Crear</button>
+					<button class="cancel button" >Cancelar</button>
 				</div>
 
-				<div id="deletePOI">
+				<div id="deletePOI" class="form">
 					<select id="delete_poi">
 						<option value="" > Escoge un poi </option>
 						<?php
@@ -134,19 +173,44 @@
 							<?php }
 						?>
 					</select>
-					<button id="delete" >Eliminar</button>
+					<button id="delete" class= "button red" >Eliminar</button>
+					<button class="cancel button" >Cancelar</button>
 				</div>
 
-				<div>
+				<div id="addMultimedia" class ="form">
+					<select id="poi">
+						<option value="" > Escoge un poi </option>
+						<?php
+							$bd = new BD();
+							$resultSet = $bd->consultarMisPois("admin");
+							while ($data = pg_fetch_object($resultSet)) { ?>
+								<option value=<?php echo $data->id; ?> > <?php echo $data->nombre; ?></option>
+							<?php }
+						?>
+					</select>
+					<div id="menuMultimedia">
+						<input class="textMulti" type="radio" name="tipo" value="texto">Texto
+						<input class="linkMulti" type="radio" name="tipo" value="Imagen">Imagen
+						<input class="linkMulti" type="radio" name="tipo" value="Sonido">Sonido
+						<input class="linkMulti" type="radio" name="tipo" value="Video">Video<br>
+						<div id="multimediaPOI">
+							<p id ="contenidoMultimedia">Texto:</p>
+							<p id ="contenidoMultimediaEnlace">Enlace:</p>
+							<input id="contenidoMultimediaPOI" type="text">
+						</div>
+					</div>
+
+					<button id="addMulti" class ="button green">Agregar</button>
+					<button class="cancel button" >Cancelar</button>
 				</div>
 
 				<br>
 				<div id="buttonOptions" align="center">
-					<button id="filterButton">Filtrar</button>
-					<button id="searchButton">Buscar</button>
-					<button id="addButton">Agregar POI</button>
-					<button id="deleteButton">Eliminar POI</button>
-					<button id="addMultimediaButton">Agregar Multimedia</button>
+					<button id="filterButton" class ="button purple">Filtrar</button>
+					<button id="searchButton" class ="button ">Buscar</button>
+					<button id="addButton" class="button green">Agregar POI</button>
+					<button id="deleteButton" class ="button red">Eliminar POI</button>
+					<button id="addMultimediaButton" class ="button blue">Agregar Multimedia</button>
 				</div>
 			</div>			
 		</div>		

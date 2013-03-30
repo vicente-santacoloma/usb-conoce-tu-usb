@@ -104,7 +104,7 @@ class Poi {
     }
 
     public function columnsDB() {
-        return '"' . "creator" . '","' . "nombre" . '","' . "descripcion" . '","' 
+        return '"' . "creador" . '","' . "nombre" . '","' . "descripcion" . '","' 
 					. "longitud" . '","' . "latitud" . '","' . "altitud" . '"';
     }
 

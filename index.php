@@ -62,6 +62,27 @@ function removePOI() {
 
 }
 
+function addMultimediaToPOI(){
+
+
+	$bd = new BD();
+	$poi_id = $_GET['filter_id_poi'];
+
+	$multimedia = new Multimedia();
+	$multimedia->setPoi($poi_id);
+	$multimedia->setTipo($_GET['filter_tipo']);
+	if($multimedia->getTipo() == "texto") {
+		$multimedia->setEnlace($_GET['filter_multimedia']);
+	  $multimedia->setDescripcion("");
+	} else {
+		$multimedia->setEnlace($_GET['filter_multimedia']);
+		$multimedia->setDescripcion("");
+	}
+
+	$bd->agregarElem($multimedia);
+
+}
+
 // MAIN CODE
 
 require_once '../ARELLibrary/arel_xmlhelper.class.php';
@@ -87,6 +108,8 @@ if($operation == 'add') {
 	addPOI($position);
 } else if ($operation == "delete") {
 	removePOI();
+} else if ($operation == "addMulti"){
+	addMultimediaToPOI();
 }
 
 $bd = new BD();
@@ -186,16 +209,21 @@ foreach($poiArray3 as $prepoi)
 	$multimediaPoiArray = $prepoi->getMultimedia();
 	foreach($multimediaPoiArray as $multimedia) {
 
-		if($multimedia->getTipo() == "Texto") {
-			array_push($junaioButtons, array($multimedia->getTipo(), $multimedia->getDescripcion(), NULL));
+		if($multimedia->getTipo() == "texto") {
+			array_push($junaioButtons, array(ucfirst("pagina web"), "Ver", $multimedia->getEnlace()));
 		} else {
-			array_push($junaioButtons, array($multimedia->getTipo(), "Ver", $multimedia->getEnlace()));
+			array_push($junaioButtons, array(ucfirst($multimedia->getTipo()), "Ver", $multimedia->getEnlace()));
 		}	
 	}
-	
+		$finalDescription = $description."\n\n";
+	$finalDescription = $finalDescription. " CATEGORIAS : ". "\n";
+	$categorias = $prepoi->getCategorias();
+	foreach($categorias as $categoria) {
+		$finalDescription = $finalDescription . " \n * ". $categoria->getNombre();
+	}
 	//create the POI
 	$poi = ArelXMLHelper::createLocationBasedPOI($id, $title, array($longitude, $latitude, $altitude), 
-		"/resources/thumb.png", "/resources/icon.png", $description, $junaioButtons);
+		"/resources/poiBig.jpeg", "/resources/poi.jpeg", $finalDescription, $junaioButtons);
 	
 	//20000km -> 20'000'000m -> see them all over the world
 	$poi->setMaxDistance(20000000);	
@@ -204,11 +232,17 @@ foreach($poiArray3 as $prepoi)
 	//output the POI
 	if(!empty($filter))
 	{
+		if (strtolower($filter) == "todas"){
+			ArelXMLHelper::outputObject($poi);
+		}
+		else{
 		$categorias = $prepoi->getCategorias();
-		foreach($categorias as $categoria) {
-			if(strtolower($filter) == strtolower($categoria->getNombre()))
-			{
-				ArelXMLHelper::outputObject($poi);
+
+			foreach($categorias as $categoria) {
+				if(strtolower($filter) == strtolower($categoria->getNombre()))
+				{
+					ArelXMLHelper::outputObject($poi);
+				}
 			}
 		}
 	}

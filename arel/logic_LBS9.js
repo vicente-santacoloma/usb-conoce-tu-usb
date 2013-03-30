@@ -33,9 +33,15 @@ function ArelFilter()
 
 			$('#delete').click(function() { that.deletePOIServer(); return true; });
 
+			$('#addMulti').click(function() { 
+				that.addMultimediaToPoiServer();
+	
+			return true;});
+
 			$('.filterbuttonArea a.filterButton').click(function() {
 				$('.filterOptionsInner').slideToggle(900);				
-		    	});			
+		    	});	
+		//	$('.cancel').click(function() { this.hide(); return true;});		
 		}
 		catch(e)
 		{
@@ -134,6 +140,16 @@ function ArelFilter()
 		arel.Scene.triggerServerCall(true, {"filter_operation" : "delete", "filter_poi_id": poi_id}, false);		
 	};
 	
+	this.addMultimediaToPoiServer = function()
+	{
+		var poi_id = $("#poi").val();
+		var tipo = $('input[name=tipo]:checked').val();
+		var contenido = $("#contenidoMultimediaPOI").val();
+
+		arel.Scene.triggerServerCall(true,{"filter_id_poi": poi_id, "filter_tipo": tipo, "filter_operation" : "addMulti", "filter_multimedia": contenido},false);
+
+	}
+
 	this.keyControl = function(oEvent) {
 		
 		var keycode;
