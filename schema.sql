@@ -27,7 +27,7 @@ CREATE SEQUENCE "USB".idpois_sequence
 
 CREATE TABLE "USB".pois(
      id INTEGER NOT NULL DEFAULT nextval('"USB".idpois_sequence'::regclass),
-     creator VARCHAR(50) NOT NULL DEFAULT 'admin',
+     creador VARCHAR(50) NOT NULL DEFAULT 'admin',
      nombre VARCHAR(30) NOT NULL, 
      descripcion VARCHAR(100) NOT NULL,
      longitud NUMERIC(18,12) NOT NULL,
